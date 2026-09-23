@@ -26,6 +26,14 @@ import sys
 import textwrap
 from itertools import cycle
 
+# Ensure UTF-8 output on Windows consoles
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 
 # ══════════════════════════════════════════════════════════════════════
 # TERMINAL FORMATTING
@@ -695,10 +703,15 @@ def main():
     else:
         filepath = args.file
         if not os.path.isfile(filepath):
-            print(f"  {C.RED}[!] File not found: {filepath}{C.RESET}")
-            print(f"  {C.DIM}    Create a 'cipher.txt' file with the challenge data,")
-            print(f"    or use  -i \"your string\"  for inline input.{C.RESET}")
-            sys.exit(1)
+            # Check relative to script location (e.g. tools/cipher.txt)
+            script_relative = os.path.join(os.path.dirname(os.path.abspath(__file__)), filepath)
+            if os.path.isfile(script_relative):
+                filepath = script_relative
+            else:
+                print(f"  {C.RED}[!] File not found: {filepath}{C.RESET}")
+                print(f"  {C.DIM}    Create a 'cipher.txt' file with the challenge data,")
+                print(f"    or use  -i \"your string\"  for inline input.{C.RESET}")
+                sys.exit(1)
         with open(filepath, "r", encoding="utf-8", errors="replace") as f:
             raw = f.read()
         print(f"  {C.GREEN}[+]{C.RESET} Loaded {len(raw)} chars from {C.BOLD}{filepath}{C.RESET}")

@@ -1,4 +1,12 @@
 # دليل مساحة العمل الشامل لمسابقات السايبر والأمن السيبراني (CTF Blueprint)
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.10%2B-blue?logo=python" alt="Python 3.10+">
+  <img src="https://img.shields.io/badge/Platform-CyberTalents%20%7C%20Global%20CTFs-red" alt="Platform">
+  <img src="https://img.shields.io/badge/Framework-Modular%20CTF%20Toolkit-green" alt="Toolkit">
+  <img src="https://img.shields.io/badge/Team-FDC-orange" alt="FDC Team">
+</p>
+
 **الإصدار**: 2.0 | **الفريق**: FDC Team | **المنصة المستهدفة**: CyberTalents & Global CTFs  
 **اللغة**: العربية (شرح تفصيلي تقني احترافي)
 
@@ -7,66 +15,91 @@
 ## 📌 الفهرس العام
 
 1. [نظرة عامة على المشروع وهيكل الفولدرات](#1-نظرة-عامة-على-المشروع-وهيكل-الفولدرات)
-2. [الأدوات المركزية المستقلة (Root Tools)](#2-الأدوات-المركزية-المستقلة-root-tools)
-   - [أداة فك التشفيرات الشاملة `decoder.py` وملف `cipher.txt`](#أداة-فك-التشفيرات-الشاملة-decoderpy-وملف-ciphertxt)
-   - [دليل الامتثال وقفل الذكاء الاصطناعي `AI_Deactivation_and_Compliance_Guide.md`](#دليل-الامتثال-وقفل-الذكاء-الاصطناعي-ai_deactivation_and_compliance_guidemd)
-3. [أدلة الاحتراف وخرائط الحلول (Cheat Sheets السريعة)](#3-أدلة-الاحتراف-وخرائط-الحلول-cheat-sheets-السريعة)
-4. [شرح مجلدات التحديات الخمسة](#4-شرح-مجلدات-التحديات-الخمسة)
+2. [التثبيت والإعداد السريع (Quick Setup)](#2-التثبيت-والإعداد-السريع-quick-setup)
+3. [الأدوات المركزية المستقلة (`tools/`)](#3-الأدوات-المركزية-المستقلة-tools)
+   - [أداة فك التشفيرات الشاملة `decoder.py` وملف `cipher.txt`](#أداة-فك-التشفيرات-الشاملة-toolsdecoderpy)
+4. [دليل الامتثال وقفل الذكاء الاصطناعي (`docs/`)](#4-دليل-الامتثال-وقفل-الذكاء-الاصطناعي-docs)
+5. [أدلة الاحتراف وخرائط الحلول (Cheat Sheets السريعة)](#5-أدلة-الاحتراف-وخرائط-الحلول-cheat-sheets-السريعة)
+6. [شرح مجلدات التحديات الخمسة](#6-شرح-مجلدات-التحديات-الخمسة)
    - [مجلد التشفير (`Crypto/`)](#أ-مجلد-التشفير-crypto)
    - [مجلد الويب واختراق المواقع (`Web/`)](#ب-مجلد-الويب-واختراق-المواقع-web)
    - [مجلد استغلال الثغرات الثنائية (`Pwn/`)](#ج-مجلد-استغلال-الثغرات-الثنائية-pwn)
    - [مجلد الهندسة العكسية (`Reverse/`)](#د-مجلد-الهندسة-العكسية-reverse)
    - [مجلد التحقيق الجنائي الرقمي (`Forensics/`)](#هـ-مجلد-التحقيق-الجنائي-الرقمي-forensics)
-5. [بروتوكول إدارة الوقت واستراتيجية حل المسابقة](#5-بروتوكول-إدارة-الوقت-واستراتيجية-حل-المسابقة)
+7. [بروتوكول إدارة الوقت واستراتيجية حل المسابقة](#7-بروتوكول-إدارة-الوقت-واستراتيجية-حل-المسابقة)
 
 ---
 
 ## 1. نظرة عامة على المشروع وهيكل الفولدرات
 
-تم تصميم وتجهيز هذه المساحة بالكامل لتكون منصة انطلاق احترافية، سريعة، وحاسمة أثناء خوض مسابقات الأمن السيبراني (CTF)، وتحديداً مسابقات منصة **CyberTalents** والمسابقات الإقليمية والدولية.
+تم تصميم وتجهيز هذه المساحة بالكامل لتكون منصة انطلاق احترافية، سريعة، وحاسمة أثناء خوض مسابقات الأمن السيبراني (CTF)، وتحديداً مسابقات منصة **CyberTalents** والمسابقات الإقليمية والدولية. تم تنظيم المستودع بشكل معياري (Modular) ليكون كل قسم مستقلاً بذاته ومزوداً بدليله الخاص وأدواته والشيت شيت التكتيكي.
 
 ### خريطة شجرة الملفات والمجلدات:
 
 ```text
-CTF-FDC/
-├── decoder.py                                 # أقوى أداة محلية لفك التشفيرات والترميزات
-├── cipher.txt                                # ملف إدخال النصوص المشفرة لتفكيكها فوراً
-├── AI_Deactivation_and_Compliance_Guide.md   # الدليل الإلزامي لتعطيل الذكاء الاصطناعي للمسابقات الرسمية
-├── Web_Exploitation_CheatSheet.md            # شيت شيت شامل لاختراق الويب (أوامر وحقن وثغرات)
-├── Cryptography_CheatSheet.md                # شيت شيت شامل لكسر التشفير (RSA, AES, ECC, Attacks)
-├── Binary_Exploitation_Pwn_CheatSheet.md     # شيت شيت استغلال الذاكرة (ROP, ret2libc, Format String)
-├── Reverse_Engineering_CheatSheet.md         # شيت شيت الهندسة العكسية (Ghidra, IDA, GDB, APK, Anti-Debug)
-├── Forensics_CheatSheet.md                   # شيت شيت التحقيق الجنائي (PCAP, Memory, Steganography, Disk)
-├── دليل_المشروع_الشامل_README_AR.md         # هذا الدليل الشامل باللغة العربية
+cyber_talent_CTF/
+├── .gitignore                                   # تصفية الملفات المؤقتة والكاش
+├── requirements.txt                             # جميع المكتبات والاعتماديات البرمجية
+├── README.md                                    # هذا الدليل الشامل باللغة العربية
 │
-├── Crypto/                                   # مجلد تحديات التشفير
-│   ├── solve.py                              # قالب الحل الجاهز للربط والكسر الرياضي
-│   └── دليل_حل_التشفير_AR.md                 # الشرح العربي التفصيلي لمجلد Crypto
+├── Crypto/                                      # مجلد تحديات التشفير
+│   ├── README.md                                # دليل حل التشفير واستخدام solve.py
+│   ├── Cryptography_CheatSheet.md               # شيت شيت شامل لكسر التشفير (RSA, AES, ECC, Attacks)
+│   └── solve.py                                 # قالب الحل الجاهز للربط والكسر الرياضي
 │
-├── Web/                                      # مجلد تحديات الويب
-│   ├── fuzzer.py                             # أداة التخمين والفحص المتقدمة (Fuzzer متكامل)
-│   ├── solve.py                              # قالب استغلال الويب وإدارة الجلسات
-│   └── دليل_اختراق_الويب_AR.md               # الشرح العربي التفصيلي لمجلد Web
+├── Web/                                         # مجلد تحديات الويب
+│   ├── README.md                                # دليل اختراق الويب
+│   ├── Web_Exploitation_CheatSheet.md          # شيت شيت شامل لاختراق الويب (أوامر وحقن وثغرات)
+│   ├── fuzzer.py                                # أداة التخمين والفحص المتقدمة (Fuzzer متكامل)
+│   └── solve.py                                 # قالب استغلال الويب وإدارة الجلسات
 │
-├── Pwn/                                      # مجلد تحديات استغلال الثغرات
-│   ├── exploit.py                            # قالب الاستغلال المتقدم بـ Pwntools
-│   ├── solve.py                              # قالب الحل القياسي للمسابقات
-│   └── دليل_استغلال_الثغرات_AR.md            # الشرح العربي التفصيلي لمجلد Pwn
+├── Pwn/                                         # مجلد تحديات استغلال الثغرات الثنائية
+│   ├── README.md                                # دليل استغلال الثغرات الثنائية
+│   ├── Binary_Exploitation_Pwn_CheatSheet.md    # شيت شيت استغلال الذاكرة (ROP, ret2libc, Format String)
+│   ├── exploit.py                               # قالب الاستغلال المتقدم بـ Pwntools
+│   └── solve.py                                 # قالب الحل القياسي للمسابقات
 │
-├── Reverse/                                  # مجلد تحديات الهندسة العكسية
-│   ├── solve.py                              # قالب الربط والتحليل بـ Z3 و Angr
-│   └── دليل_الهندسة_العكسية_AR.md            # الشرح العربي التفصيلي لمجلد Reverse
+├── Reverse/                                     # مجلد تحديات الهندسة العكسية
+│   ├── README.md                                # دليل الهندسة العكسية
+│   ├── Reverse_Engineering_CheatSheet.md        # شيت شيت الهندسة العكسية (Ghidra, IDA, GDB, APK, Anti-Debug)
+│   └── solve.py                                 # قالب الربط والتحليل بـ Z3 و Angr
 │
-└── Forensics/                                # مجلد تحديات التحقيق الرقمي
-    ├── solve.py                              # أداة فحص الهيدر واستخراج النصوص والبيانات المخفية
-    └── دليل_التحقيق_الجنائي_AR.md            # الشرح العربي التفصيلي لمجلد Forensics
+├── Forensics/                                   # مجلد تحديات التحقيق الرقمي الجنائي
+│   ├── README.md                                # دليل التحقيق الجنائي وفحص الأدلة
+│   ├── Forensics_CheatSheet.md                  # شيت شيت التحقيق الجنائي (PCAP, Memory, Steganography, Disk)
+│   └── solve.py                                 # أداة فحص الهيدر واستخراج النصوص والبيانات المخفية
+│
+├── tools/                                       # الأدوات المركزية المشتركة
+│   ├── README.md                                # دليل استخدام أدوات المسابقة
+│   ├── decoder.py                               # أقوى أداة محلية لفك التشفيرات والترميزات
+│   └── cipher.txt                               # ملف إدخال النصوص المشفرة لتفكيكها فوراً
+│
+└── docs/                                        # التوثيق والسياسات الرسمية
+    └── AI_Deactivation_and_Compliance_Guide.md  # الدليل الإلزامي لتعطيل الذكاء الاصطناعي للمسابقات الرسمية
 ```
 
 ---
 
-## 2. الأدوات المركزية المستقلة (Root Tools)
+## 2. التثبيت والإعداد السريع (Quick Setup)
 
-### أداة فك التشفيرات الشاملة `decoder.py` وملف `cipher.txt`
+لتجهيز البيئة البرمجية وتثبيت كافة المكتبات اللازمة لحل جميع التحديات:
+
+```powershell
+# 1. استنساخ المستودع
+git clone https://github.com/ZiadMahmoud2003/cyber_talent_CTF.git
+cd cyber_talent_CTF
+
+# 2. تثبيت الاعتماديات
+pip install -r requirements.txt
+```
+
+> **ملاحظة**: لمسار الـ Pwn واستغلال الثغرات الثنائية المتقدمة، يُوصى بالتشغيل داخل بيئة **Linux** أو **WSL2** لضمان عمل مكتبة `pwntools` بأقصى كفاءة.
+
+---
+
+## 3. الأدوات المركزية المستقلة (`tools/`)
+
+### أداة فك التشفيرات الشاملة [`tools/decoder.py`](tools/decoder.py)
 
 #### ما هي الأداة وما الغرض منها؟
 هي أداة سطر أوامر بايثون حتمية (Deterministic) تم بناؤها من الصفر بدون أي اعتمادية على الذكاء الاصطناعي أو الإنترنت، مهمتها أخذ أي نص مشفر أو مرمّز (Ciphertext / Encoded string) وتجربة كل خوارزميات التشفير الكلاسيكية والترميزات المعروفة تلقائياً بضغطة زر واحدة واستخراج الفلاج (Flag) وتلوينه فوراً في الشاشة.
@@ -91,32 +124,30 @@ CTF-FDC/
 
 #### كيف تستخدم الأداة؟
 
-1. **الطريقة الأسهل والأسرع أثناء المسابقة (قراءة الملف `cipher.txt`)**:
-   - افتح ملف `cipher.txt` وضع بداخله النص المشفر الذي حصلت عليه في التحدي واحفظ الملف (`Ctrl + S`).
-   - في موجه الأوامر (Terminal)، شغل:
+1. **الطريقة الأسهل والأسرع أثناء المسابقة (قراءة الملف `tools/cipher.txt`)**:
+   - ضع النص المشفر داخل [`tools/cipher.txt`](tools/cipher.txt) ثم شغل:
      ```powershell
-     python decoder.py
+     python tools/decoder.py
      ```
 2. **تمرير نص مباشر في سطر الأوامر**:
    ```powershell
-   python decoder.py -i "4644437b6833785f643363306433647d"
+   python tools/decoder.py -i "4644437b6833785f643363306433647d"
    ```
 3. **تحديد صيغة فلاج المسابقة للبحث السريع وتلوينه بالأخضر**:
    ```powershell
-   python decoder.py -f cipher.txt --flag "FDC"
-   # أو لأي مسابقة أخرى:
-   python decoder.py -i "..." --flag "flag"
+   python tools/decoder.py --flag "FLAG"
    ```
 4. **تحديد ملف مخصص**:
    ```powershell
-   python decoder.py -f "Crypto/secret.enc"
+   python tools/decoder.py -f "Crypto/secret.enc"
    ```
 
 ---
 
-### دليل الامتثال وقفل الذكاء الاصطناعي `AI_Deactivation_and_Compliance_Guide.md`
+## 4. دليل الامتثال وقفل الذكاء الاصطناعي (`docs/`)
 
-#### ما هو وما أهميته؟
+### دليل الامتثال [`docs/AI_Deactivation_and_Compliance_Guide.md`](docs/AI_Deactivation_and_Compliance_Guide.md)
+
 في المسابقات الرسمية والنهائيات الحضورية (On-site Finals) أو المسابقات الخاضعة لمراقبة الحكام (Proctors)، يُمنع منعاً باتاً استخدام الذكاء الاصطناعي (مثل GitHub Copilot، Cursor AI، Continue، Tabnine).
 
 هذا الملف عبارة عن دليل تقني أمني متكامل أعده مسؤول التزام وأمن نظم (IT Security Compliance Officer) يوضح:
@@ -127,138 +158,97 @@ CTF-FDC/
 
 ---
 
-## 3. أدلة الاحتراف وخرائط الحلول (Cheat Sheets السريعة)
+## 5. أدلة الاحتراف وخرائط الحلول (Cheat Sheets السريعة)
 
 تم تزويد بيئة العمل بخمسة ملفات مرجعية ضخمة مبنية وفق منهجية الحل التكتيكي:
 > **«عندما تواجه [سيناريو/نمط معين] ⬅️ نفذ [الإجراء التالي] ⬅️ باستخدام [الأداة والأمر الدقيق]»**
 
-1. **`Web_Exploitation_CheatSheet.md`**:
-   - تخمين المسارات بـ `ffuf` و `gobuster` مع تجاوز الفلاتر.
-   - تجاوز تسجيل الدخول (SQLi Auth Bypass، NoSQL Regex Injection).
-   - حقن القوالب (Jinja2/Tornado SSTI RCE) واستخراج متغيرات البيئة.
-   - تضمين الملفات وثغرات المسارات (LFI Wrappers: `php://filter`).
-   - حقن الأوامر (Command Injection) وتجاوز فلاتر المسافات بـ `${IFS}`.
-2. **`Cryptography_CheatSheet.md`**:
-   - كسر RSA بجميع حالاته (Small e / Wiener's Attack / Common Modulus / FactorDB).
-   - هجمات AES (ECB Penguin Byte Flipping / CBC Padding Oracle).
-   - المفاتيح المشتركة والتوليد الضعيف للأرقام العشوائية (PRNG Cracking).
-   - كسر الهاشات بـ Hashcat و John the Ripper.
-3. **`Binary_Exploitation_Pwn_CheatSheet.md`**:
-   - استراتيجيات الالتفاف على الحمايات (NX, Stack Canary, PIE, ASLR, RELRO).
-   - حساب الإزاحة (Offset) الدقيقة باستخدام Pwntools Cyclic Patterns.
-   - تقنيات ret2win، وحقن الشيل كود (Shellcode Injection).
-   - بناء ROP Chains كاملة واستغلال ret2libc في بيئة 64-bit و 32-bit.
-   - استغلال ثغرات سلاسل التنسيق (Format String Exploitation).
-4. **`Reverse_Engineering_CheatSheet.md`**:
-   - الفحص المبدئي (Static Triage) والتعرف على التشفير والضغط بـ UPX.
-   - التحليل العكسي بـ Ghidra و IDA Pro وتتبع الدوال الرئيسية.
-   - تصحيح الأخطاء الديناميكي (Dynamic Debugging) بـ GDB + GEF ووضع Breakpoints.
-   - كسر حماية الفحص الذاتي ومكافحة التصحيح (Anti-Debugging / ptrace bypass).
-   - فك هندسة تطبيقات الأندرويد APK بـ JADX و Apktool وتعديل Smali.
-5. **`Forensics_CheatSheet.md`**:
-   - فحص وتصحيح الهيدر التالف (Magic Bytes Repair).
-   - استخراج الملفات المخفية بـ Binwalk و Foremost.
-   - إخفاء البيانات في الصور (Steganography: Steghide, zsteg, LSB, ExifTool).
-   - تحليل حزم الشبكة (Wireshark / Tshark / Scapy Filters).
-   - تحليل ذاكرة الرام (Memory Dump Analysis بـ Volatility 3).
+| المجال | رابط الشيت شيت | أهم المحاور والتقنيات |
+| :--- | :--- | :--- |
+| **الويب (Web)** | 📄 [Web Exploitation CheatSheet](Web/Web_Exploitation_CheatSheet.md) | `ffuf`, `gobuster`, SQLi Bypass, NoSQL, SSTI RCE, LFI Wrappers, Command Injection |
+| **التشفير (Crypto)** | 📄 [Cryptography CheatSheet](Crypto/Cryptography_CheatSheet.md) | RSA (Small e, Wiener, FactorDB), AES (ECB, CBC Padding Oracle), PRNG, Hashcat |
+| **استغلال الثغرات (Pwn)** | 📄 [Binary Exploitation CheatSheet](Pwn/Binary_Exploitation_Pwn_CheatSheet.md) | NX/ASLR/Canary Bypass, Cyclic Offset, ret2win, Shellcode, ROP Chains, ret2libc, Format Strings |
+| **الهندسة العكسية (Reverse)** | 📄 [Reverse Engineering CheatSheet](Reverse/Reverse_Engineering_CheatSheet.md) | Ghidra, IDA Pro, GDB+GEF, Anti-Debug Bypass, APK Decompilation, Z3 Solver, Angr |
+| **التحقيق الجنائي (Forensics)** | 📄 [Forensics CheatSheet](Forensics/Forensics_CheatSheet.md) | Magic Bytes Repair, Binwalk, Steganography (Steghide, zsteg, LSB), PCAP Wireshark, Volatility 3 |
 
 ---
 
-## 4. شرح مجلدات التحديات الخمسة
+## 6. شرح مجلدات التحديات الخمسة
 
-### أ. مجلد التشفير (`Crypto/`)
-- **الملف `solve.py`**:
-  - **ما هو؟**: سكريبت بايثون مهيأ مسبقاً بمكتبات التشفير المتقدمة (`pycryptodome`, `sympy`, `hashlib`).
-  - **كيف اتعمل؟**: يحتوي على دوال جاهزة لحساب مقلوب الضرب النمطي (`inverse(e, phi)`), تحويل النصوص إلى أرقام ضخمة (`bytes_to_long`, `long_to_bytes`), كسر التشفير الخطي, وتمرير المعطيات عبر معالجة الـ CLI (`argparse`).
-  - **كيف تستخدمه؟**:
-    ```powershell
-    cd Crypto
-    # تشغيل وحل تحدي يقرأ ملفاً محلياً:
-    python solve.py -f challenge.txt
-    # أو تمرير نص مباشر:
-    python solve.py -d "ciphertext_here"
-    ```
+### أ. مجلد التشفير ([`Crypto/`](Crypto/))
+- **دليل الاستخدام الكامل**: [`Crypto/README.md`](Crypto/README.md)
+- **شيت شيت التشفير**: [`Crypto/Cryptography_CheatSheet.md`](Crypto/Cryptography_CheatSheet.md)
+- **سكريبت الحل [`Crypto/solve.py`](Crypto/solve.py)**:
+  - سكريبت بايثون مهيأ مسبقاً بمكتبات التشفير المتقدمة (`pycryptodome`, `sympy`, `hashlib`).
+  - دوال جاهزة لمقلوب الضرب النمطي (`inverse`), تحويل الأرقام والنصوص الضخمة (`bytes_to_long`, `long_to_bytes`), وهجمات RSA و AES.
+  ```powershell
+  cd Crypto
+  python solve.py -f challenge.txt
+  python solve.py -d "ciphertext_here"
+  ```
 
-### ب. مجلد الويب واختراق المواقع (`Web/`)
-- **الملف `fuzzer.py`**:
-  - **ما هو؟**: أداة فحص وتخمين مسارات ومعاملات خارقة للعادة تم كتابتها بالكامل بمكتبة `requests` و `ThreadPoolExecutor` لدعم تعدد المهام السريع.
-  - **ماذا تفعل؟**:
-    - تدعم استبدال الكلمة المفتاحية `FUZZ` في أي مكان (في الرابط، في الهيدر، في المعاملات، أو في جسم طلب POST/JSON).
-    - تدعم الحفاظ على الجلسة (Session Persistence) والكوكيز.
-    - تدعم فلترة الردود بدقة (Filter by Status Code, Word Count, Line Count, Regex Pattern).
-  - **كيف تستخدمه؟**:
-    ```powershell
-    cd Web
-    # تخمين مسارات موقع وتصفية أخطاء 404:
-    python fuzzer.py -u "http://target:8080/FUZZ" -w wordlist.txt -fc 404
+### ب. مجلد الويب واختراق المواقع ([`Web/`](Web/))
+- **دليل الاستخدام الكامل**: [`Web/README.md`](Web/README.md)
+- **شيت شيت الويب**: [`Web/Web_Exploitation_CheatSheet.md`](Web/Web_Exploitation_CheatSheet.md)
+- **أداة الفحص والتخمين [`Web/fuzzer.py`](Web/fuzzer.py)**:
+  - أداة فحص وتخمين مسارات ومعاملات فائقة السرعة تدعم تعدد المسارات (`ThreadPoolExecutor`).
+  - دعم كلمة `FUZZ` في المسارات، الهيدرز، والمعاملات مع فلترة متقدمة للردود (`-fc`, `-fr`, `-fw`).
+  ```powershell
+  cd Web
+  python fuzzer.py -u "http://target:8080/FUZZ" -w wordlist.txt -fc 404
+  ```
+- **سكريبت الحل [`Web/solve.py`](Web/solve.py)**: قالب استغلال الويب وإدارة الجلسات واستخراج الفلاج بـ BeautifulSoup و Regex.
 
-    # تخمين كلمة سر نموذج تسجيل الدخول POST:
-    python fuzzer.py -u "http://target:8080/login" -w passwords.txt -m POST -p "user=admin&pass=FUZZ" -fr "Welcome"
-    ```
-- **الملف `solve.py`**:
-  - قالب استغلال الويب الجاهز لإرسال طلبات سريعة، استخراج الفلاج بـ Regex و BeautifulSoup، وتمرير الـ Proxies لـ Burp Suite.
+### ج. مجلد استغلال الثغرات الثنائية ([`Pwn/`](Pwn/))
+- **دليل الاستخدام الكامل**: [`Pwn/README.md`](Pwn/README.md)
+- **شيت شيت استغلال الذاكرة**: [`Pwn/Binary_Exploitation_Pwn_CheatSheet.md`](Pwn/Binary_Exploitation_Pwn_CheatSheet.md)
+- **سكريبت الاستغلال المتقدم [`Pwn/exploit.py`](Pwn/exploit.py)**:
+  - سكريبت Pwntools متكامل مهيأ للتشغيل المحلي (Local Process)، والاتصال الخارجي (Remote Netcat)، ومصحح الأخطاء GDB.
+  - حساب الإزاحة (Offset) تلقائياً بـ `cyclic`، وتسريب عناوين Libc، وبناء ROP Chains للحصول على Interactive Shell.
+  ```powershell
+  cd Pwn
+  python exploit.py         # محلي
+  python exploit.py REMOTE  # سيرفر المسابقة
+  python exploit.py DEBUG   # تصحيح بـ GDB
+  ```
+- **سكريبت الحل الأساسي [`Pwn/solve.py`](Pwn/solve.py)**: قالب إضافي مبسط للتعامل مع تحديات الذاكرة البسيطة.
 
-### ج. مجلد استغلال الثغرات الثنائية (`Pwn/`)
-- **الملف `exploit.py`**:
-  - **ما هو؟**: سكريبت Pwntools متكامل مهيأ للتشغيل المحلي (Local Process)، والاتصال الخارجي (Remote Netcat)، والتشغيل داخل مصحح الأخطاء GDB بضغطة زر.
-  - **ماذا يفعل؟**:
-    - حساب الإزاحة (Offset) تلقائياً بـ `cyclic` و `cyclic_find`.
-    - تهيئة الـ ROP Gadgets وتسريب عناوين دوال مكتبة C (`puts(puts@got)`).
-    - حساب قاعدة Libc (`libc_base`) وتجهيز استدعاء `system("/bin/sh")`.
-    - التحويل إلى النمط التفاعلي المباشر (`io.interactive()`) للتحكم في الشيل.
-  - **كيف تستخدمه؟**:
-    ```powershell
-    cd Pwn
-    # تشغيل محلي:
-    python exploit.py
-    # تشغيل على سيرفر المسابقة البعيد:
-    python exploit.py REMOTE
-    # ربط تلقائي بـ GDB لفحص الذاكرة:
-    python exploit.py DEBUG
-    ```
+### د. مجلد الهندسة العكسية ([`Reverse/`](Reverse/))
+- **دليل الاستخدام الكامل**: [`Reverse/README.md`](Reverse/README.md)
+- **شيت شيت الهندسة العكسية**: [`Reverse/Reverse_Engineering_CheatSheet.md`](Reverse/Reverse_Engineering_CheatSheet.md)
+- **سكريبت الحل والتحليل [`Reverse/solve.py`](Reverse/solve.py)**:
+  - سكريبت مهيأ بمحلل القيود الرياضية **Z3 Solver** لحل معادلات الفحص واستخراج الفلاج آلياً.
+  - كود مهيأ لمحرك التنفيذ الرمزي **Angr** لاكتشاف المسارات المؤدية لطباعة الفلاج.
+  ```powershell
+  cd Reverse
+  python solve.py -f ./crackme
+  ```
 
-### د. مجلد الهندسة العكسية (`Reverse/`)
-- **الملف `solve.py`**:
-  - **ما هو؟**: سكريبت لحل وتخطي الشروط المعقدة برمجياً.
-  - **ماذا يفعل؟**:
-    - يحتوي على بيئة عمل جاهزة لمحلل القيود الرياضية **Z3 Solver** (لحل معادلات الفحص الرياضية واستخراج الفلاج دون حلها يدوياً).
-    - يحتوي على كود مهيأ لمحرك التنفيذ الرمزي **Angr** لاستكشاف المسارات حتى الوصول إلى عنوان الدالة الناجحة (Find Success Address / Avoid Failure Address).
-  - **كيف تستخدمه؟**:
-    ```powershell
-    cd Reverse
-    python solve.py -f ./crackme
-    ```
-
-### هـ. مجلد التحقيق الجنائي الرقمي (`Forensics/`)
-- **الملف `solve.py`**:
-  - **ما هو؟**: سكريبت تشخيصي واستخراجي للبيانات المخفية من الملفات والصور وحزم الشبكة.
-  - **ماذا يفعل؟**:
-    - فحص هيدر الملف (Magic Bytes Verification) لتحديد ما إذا كان الملف تالفاً أو تم تغيير امتداده للتمويه (مثلاً ملف ZIP مسمى PNG).
-    - استخراج النصوص القابلة للقراءة وترشيح الفلاجات (`FDC{...}`).
-    - قراءة بيانات EXIF الوصفية من الصور.
-    - استخراج بتات LSB من صور PNG/BMP للبحث عن نصوص مخبأة.
-    - قراءة وتصفية ملفات التقاط الشبكة PCAP بـ Scapy واستخراج نصوص الـ Raw Data.
-  - **كيف تستخدمه؟**:
-    ```powershell
-    cd Forensics
-    python solve.py -f challenge.pcap
-    # أو لفحص صورة:
-    python solve.py -f evidence.png
-    ```
+### هـ. مجلد التحقيق الجنائي الرقمي ([`Forensics/`](Forensics/))
+- **دليل الاستخدام الكامل**: [`Forensics/README.md`](Forensics/README.md)
+- **شيت شيت التحقيق الجنائي**: [`Forensics/Forensics_CheatSheet.md`](Forensics/Forensics_CheatSheet.md)
+- **سكريبت الفحص والاستخراج [`Forensics/solve.py`](Forensics/solve.py)**:
+  - فحص هيدر الملف (Magic Bytes Verification) لاكتشاف وتصحيح التلف أو تغيير الامتدادات.
+  - استخراج نصوص ASCII/Unicode، قراءة بيانات EXIF من الصور، وفحص بتات LSB.
+  - قراءة وتصفية ملفات PCAP بـ Scapy واستخراج نصوص وحزم البيانات.
+  ```powershell
+  cd Forensics
+  python solve.py -f challenge.pcap
+  python solve.py -f evidence.png
+  ```
 
 ---
 
-## 5. بروتوكول إدارة الوقت واستراتيجية حل المسابقة
+## 7. بروتوكول إدارة الوقت واستراتيجية حل المسابقة
 
 1. **الدقائق العشر الأولى (Triage & Reconnaissance)**:
-   - افتح كل التحديات المتاحة في المسابقة.
-   - صنف التحديات من الأسهل للأصعب (Low-hanging fruit).
+   - افتح كل التحديات المتاحة في المسابقة وصنفها من الأسهل للأصعب (Low-hanging fruit).
    - قم بتنزيل الملفات وضع كل ملف في مجلده المخصص (`Crypto`, `Web`, `Pwn`, `Reverse`, `Forensics`).
 2. **استخدام أدوات الحسم السريع (Immediate Automation)**:
-   - أي نص مشفر غير واضح ⬅️ ضعه في `cipher.txt` وشغل `python decoder.py`.
-   - أي ملف غريب في الفورنسيك ⬅️ شغله فوراً بـ `Forensics/solve.py -f file` لمعرفة نوعه وفحص هيدره.
-   - أي فورم ويب محتاج تخمين ⬅️ شغل `Web/fuzzer.py` وتجنب إضاعة الوقت في الكتابة اليدوية.
+   - أي نص مشفر غير واضح ⬅️ ضعه في [`tools/cipher.txt`](tools/cipher.txt) وشغل `python tools/decoder.py`.
+   - أي ملف غريب في الفورنسيك ⬅️ شغله فوراً بـ `python Forensics/solve.py -f file` لمعرفة نوعه وفحص هيدره.
+   - أي فورم ويب يحتاج تخمين ⬅️ شغل `python Web/fuzzer.py` فوراً وتجنب إضاعة الوقت.
 3. **الرجوع للشيت شيت عند التعطل**:
-   - لا تبحث على جوجل عشوائياً، افتح ملف الـ CheatSheet الخاص بالمجال (مثلاً `Web_Exploitation_CheatSheet.md`) وابحث بالـ Scenario المناسب وانسخ الأمر فوراً.
+   - لا تبحث عشوائياً، افتح ملف الـ CheatSheet الخاص بالمجال وابحث عن السيناريو المناسب وانسخ الأمر مباشرة.
 4. **توثيق الحلول (Write-up & Flag Submission)**:
-   - بمجرد ظهور الفلاج، تأكد من الصيغة المطلوبة وضعه فوراً في المنصة لكسب النقاط وبونص الوقت المبكر (Early Blood).
+   - بمجرد ظهور الفلاج، تأكد من الصيغة المطلوبة وسلمه فوراً في المنصة لكسب النقاط وبونص الوقت المبكر (Early Blood).

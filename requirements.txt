@@ -1,0 +1,26 @@
+# ==============================================================================
+# CyberTalents & Global CTF Framework - Dependencies
+# Install: pip install -r requirements.txt
+# ==============================================================================
+
+# ── Web Exploitation ─────────────────────────────────────────────────────────
+requests>=2.31.0
+urllib3>=2.0.0
+beautifulsoup4>=4.12.0
+PyJWT>=2.8.0
+
+# ── Cryptography & Math ──────────────────────────────────────────────────────
+pycryptodome>=3.20.0
+sympy>=1.12.0
+z3-solver>=4.12.0
+
+# ── Binary Exploitation (Pwn) & Reverse Engineering ──────────────────────────
+# Note: Pwntools is fully functional on Linux/WSL; Windows has partial support.
+pwntools>=4.12.0
+capstone>=5.0.0
+
+# ── Forensics & File / Packet Analysis ───────────────────────────────────────
+Pillow>=10.2.0
+scapy>=2.5.0
+python-magic-bin>=0.4.14; sys_platform == 'win32'
+python-magic>=0.4.27; sys_platform != 'win32'
