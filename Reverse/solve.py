@@ -35,7 +35,10 @@ except ImportError:
 
 try:
     import angr
-    import claripy
+    try:
+        from angr.rustylib import claripy
+    except ImportError:
+        import claripy
 except ImportError:
     print("[!] angr not installed — run: pip install angr")
 
